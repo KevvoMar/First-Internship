@@ -1,0 +1,2 @@
+export  const HOTCOLLECTIONS_API_URL = "https://us-central1-nft-cloud-functions.cloudfunctions.net/hotCollections";
+        const NEWITEMS_API_URL = "https://us-central1-nft-cloud-functions.cloudfunctions.net/newitems";
