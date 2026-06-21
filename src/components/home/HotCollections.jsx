@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import AuthorImage from "../../images/author_thumbnail.jpg";
 import nftImage from "../../images/nftImage.jpg";
-import { HOTCOLLECTIONS_API_URL } from "../../api/config";
+import { API } from "../../api/config";
 import axios from "axios";
 import Skeleton from "../UI/Skeleton";
 
@@ -23,7 +23,7 @@ const HotCollections = () => {
   useEffect(() => {
     const fetchCollections = async () => {
       try {
-        const res = await axios.get(`${HOTCOLLECTIONS_API_URL}/collections`);
+        const res = await axios.get(`${API.HOT_COLLECTIONS}/collections`);
         setCollections(res.data);
       } catch (err) {
         console.error("Error fetching Hot Collections:", err);
@@ -51,7 +51,7 @@ const HotCollections = () => {
         </div>
 
         <div className="position-relative mt-4">
-
+ 
           {/* LEFT ARROW */}
           <button
             onClick={handlePrev}

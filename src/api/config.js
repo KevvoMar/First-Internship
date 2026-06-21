@@ -1,2 +1,6 @@
-export  const HOTCOLLECTIONS_API_URL = "https://us-central1-nft-cloud-functions.cloudfunctions.net/hotCollections";
-        const NEWITEMS_API_URL = "https://us-central1-nft-cloud-functions.cloudfunctions.net/newitems";
+const BASE_URL = 'https://us-central1-nft-cloud-functions.cloudfunctions.net';
+
+export const API = {
+        HOT_COLLECTIONS: `${BASE_URL}/hotCollections`,
+        NEW_ITEMS: `${BASE_URL}/newItems`,
+};
