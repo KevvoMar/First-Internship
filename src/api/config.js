@@ -3,4 +3,5 @@ const BASE_URL = 'https://us-central1-nft-cloud-functions.cloudfunctions.net';
 export const API = {
         HOT_COLLECTIONS: `${BASE_URL}/hotCollections`,
         NEW_ITEMS: `${BASE_URL}/newItems`,
+        TOP_SELLERS: `${BASE_URL}/topSellers`,
 };
