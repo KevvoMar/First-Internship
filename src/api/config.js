@@ -4,4 +4,5 @@ export const API = {
         HOT_COLLECTIONS: `${BASE_URL}/hotCollections`,
         NEW_ITEMS: `${BASE_URL}/newItems`,
         TOP_SELLERS: `${BASE_URL}/topSellers`,
+        EXPLORE_ITEMS: `${BASE_URL}/explore`,
 };
