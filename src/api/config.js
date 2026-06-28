@@ -5,4 +5,5 @@ export const API = {
         NEW_ITEMS: `${BASE_URL}/newItems`,
         TOP_SELLERS: `${BASE_URL}/topSellers`,
         EXPLORE_ITEMS: `${BASE_URL}/explore`,
+        AUTHOR_DETAIL: `${BASE_URL}/authors?author=`,
 };
