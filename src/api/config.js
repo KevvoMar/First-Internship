@@ -6,4 +6,5 @@ export const API = {
         TOP_SELLERS: `${BASE_URL}/topSellers`,
         EXPLORE_ITEMS: `${BASE_URL}/explore`,
         AUTHOR_DETAIL: `${BASE_URL}/authors?author=`,
+        ITEM_DETAILS: `${BASE_URL}/itemDetails?nftId=`,
 };

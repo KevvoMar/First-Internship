@@ -4,7 +4,7 @@ import AuthorImage from "../../images/author_thumbnail.jpg";
 import Skeleton from "../UI/Skeleton";
 import CountdownTimer from "../UI/CountdownTimer";
 
-const AuthorItems = ({ nftCollection }) => {
+const AuthorItems = ({ nftCollection, authorsImage }) => {
   const loading = !nftCollection;
   const [visibleCount, setVisibleCount] = useState(8);
 
@@ -31,7 +31,7 @@ const AuthorItems = ({ nftCollection }) => {
                       <Link to={`/author/${item.authorId}`}>
                         <img
                           className="lazy"
-                          src={item.authorImage || AuthorImage}
+                          src={authorsImage}
                           alt=""
                         />
                         <i className="fa fa-check"></i>
