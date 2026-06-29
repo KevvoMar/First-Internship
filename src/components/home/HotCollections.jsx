@@ -1,22 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { API } from "../../api/config";
 import axios from "axios";
+import { API } from "../../api/config";
 import Skeleton from "../UI/Skeleton";
 
 const HotCollections = () => {
-  const [startIndex, setStartIndex] = useState(0);
   const [collections, setCollections] = useState([]);
+  const [startIndex, setStartIndex] = useState(0);
+  const [itemsPerPage, setItemsPerPage] = useState(4);
 
-  const visibleItems =
-    collections.length >= 4
-      ? [
-        collections[startIndex],
-        collections[(startIndex + 1) % collections.length],
-        collections[(startIndex + 2) % collections.length],
-        collections[(startIndex + 3) % collections.length],
-      ]
-      : [];
+  const getItemsPerPage = () => {
+    if (window.innerWidth >= 1200) return 4;
+    if (window.innerWidth >= 992) return 3;
+    if (window.innerWidth >= 768) return 2;
+    return 1;
+  };
+
+  useEffect(() => {
+    setItemsPerPage(getItemsPerPage());
+    const handleResize = () => setItemsPerPage(getItemsPerPage());
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     const fetchCollections = async () => {
@@ -38,90 +43,71 @@ const HotCollections = () => {
     setStartIndex((prev) => (prev - 1 + collections.length) % collections.length);
   };
 
+  const visibleItems =
+    collections.length > 0
+      ? Array.from({ length: itemsPerPage }, (_, i) => {
+          const index = (startIndex + i) % collections.length;
+          return collections[index];
+        })
+      : [];
+
   return (
-    <section id="section-collections" className="no-bottom" data-aos="fade-in">
+    <section id="section-collections" className="no-bottom">
       <div className="container">
-        <div className="row" data-aos="fade-up">
-          <div className="col-lg-12 text-center">
-            <h2>Hot Collections</h2>
-            <div className="small-border bg-color-2"></div>
+
+        <div className="row">
+          <div className="col-lg-12">
+            <div className="text-center">
+              <h2>Hot Collections</h2>
+              <div className="small-border bg-color-2"></div>
+            </div>
           </div>
         </div>
 
-        <div className="position-relative mt-4" data-aos="fade-up" data-aos-delay="150">
+        <div className="d-flex justify-content-center align-items-center position-relative mt-4">
 
-          {/* LEFT ARROW */}
           <button
             onClick={handlePrev}
-            className="position-absolute start-0 top-50 translate-middle-y 
-                       btn btn-light border rounded-circle shadow-sm"
-            style={{ width: "40px", height: "40px", zIndex: 10 }}
-            data-aos="zoom-in"
+            className="btn btn-light border rounded-circle shadow-sm me-3"
+            style={{ width: 40, height: 40 }}
           >
             <i className="fa fa-angle-left"></i>
           </button>
 
-          {/* RIGHT ARROW */}
-          <button
-            onClick={handleNext}
-            className="position-absolute end-0 top-50 translate-middle-y 
-                       btn btn-light border rounded-circle shadow-sm"
-            style={{ width: "40px", height: "40px", zIndex: 10 }}
-            data-aos="zoom-in"
-            data-aos-delay="100"
-          >
-            <i className="fa fa-angle-right"></i>
-          </button>
+          <div className="row justify-content-center w-100">
 
-          <div className="row mt-4">
-            {collections.length === 0
-              ? new Array(4).fill(0).map((_, index) => (
-                <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12"
-                  key={index}
-                  data-aos="fade-up"
-                  data-aos-delay={index * 100}
-                >
+            {collections.length === 0 &&
+              new Array(itemsPerPage).fill(0).map((_, index) => (
+                <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12" key={index}>
                   <div className="nft_coll">
                     <div className="nft_wrap">
                       <Skeleton width="100%" height="200px" borderRadius="10px" />
                     </div>
-
-                    <div className="nft_coll_pp d-flex align-items-center gap-2 mt-3">
+                    <div className="nft_coll_pp">
                       <Skeleton width="40px" height="40px" borderRadius="50%" />
-                      <Skeleton width="20px" height="20px" borderRadius="4px" />
+                      <i className="fa fa-check"></i>
                     </div>
-
-                    <div className="nft_coll_info mt-2">
+                    <div className="nft_coll_info">
                       <Skeleton width="70%" height="20px" borderRadius="4px" />
                       <Skeleton width="40%" height="16px" borderRadius="4px" />
                     </div>
                   </div>
                 </div>
-              ))
-              : visibleItems.map((item, index) => (
-                <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12"
-                  key={index}
-                  data-aos="fade-up"
-                  data-aos-delay={index * 100}
-                >
+              ))}
+
+            {collections.length > 0 &&
+              visibleItems.map((item, index) => (
+                <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12" key={`${item.nftId}-${index}`}>
                   <div className="nft_coll">
                     <div className="nft_wrap">
-                      <Link to={`/item-details/${item.id}`}>
-                        <img
-                          src={item.nftImage}
-                          className="lazy img-fluid"
-                          alt=""
-                        />
+                      <Link to={`/item-details/${item.nftId}`}>
+                        <img src={item.nftImage} className="lazy img-fluid" alt="" />
                       </Link>
                     </div>
 
                     <div className="nft_coll_pp">
                       <Link to={`/author/${item.authorId}`}>
-                        <img
-                          className="lazy pp-coll"
-                          src={item.authorImage}
-                          alt=""
-                        />
+                        <img className="lazy pp-coll" src={item.authorImage} alt="" />
                       </Link>
                       <i className="fa fa-check"></i>
                     </div>
@@ -135,7 +121,16 @@ const HotCollections = () => {
                   </div>
                 </div>
               ))}
+
           </div>
+
+          <button
+            onClick={handleNext}
+            className="btn btn-light border rounded-circle shadow-sm ms-3"
+            style={{ width: 40, height: 40 }}
+          >
+            <i className="fa fa-angle-right"></i>
+          </button>
 
         </div>
       </div>
