@@ -41,23 +41,24 @@ const HotCollections = () => {
   };
 
   return (
-    <section id="section-collections" className="no-bottom">
+    <section id="section-collections" className="no-bottom" data-aos="fade-in">
       <div className="container">
-        <div className="row">
+        <div className="row" data-aos="fade-up">
           <div className="col-lg-12 text-center">
             <h2>Hot Collections</h2>
             <div className="small-border bg-color-2"></div>
           </div>
         </div>
 
-        <div className="position-relative mt-4">
- 
+        <div className="position-relative mt-4" data-aos="fade-up" data-aos-delay="150">
+
           {/* LEFT ARROW */}
           <button
             onClick={handlePrev}
             className="position-absolute start-0 top-50 translate-middle-y 
                        btn btn-light border rounded-circle shadow-sm"
             style={{ width: "40px", height: "40px", zIndex: 10 }}
+            data-aos="zoom-in"
           >
             <i className="fa fa-angle-left"></i>
           </button>
@@ -68,6 +69,8 @@ const HotCollections = () => {
             className="position-absolute end-0 top-50 translate-middle-y 
                        btn btn-light border rounded-circle shadow-sm"
             style={{ width: "40px", height: "40px", zIndex: 10 }}
+            data-aos="zoom-in"
+            data-aos-delay="100"
           >
             <i className="fa fa-angle-right"></i>
           </button>
@@ -75,7 +78,11 @@ const HotCollections = () => {
           <div className="row mt-4">
             {collections.length === 0
               ? new Array(4).fill(0).map((_, index) => (
-                <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12" key={index}>
+                <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12"
+                  key={index}
+                  data-aos="fade-up"
+                  data-aos-delay={index * 100}
+                >
                   <div className="nft_coll">
                     <div className="nft_wrap">
                       <Skeleton width="100%" height="200px" borderRadius="10px" />
@@ -94,7 +101,11 @@ const HotCollections = () => {
                 </div>
               ))
               : visibleItems.map((item, index) => (
-                <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12" key={index}>
+                <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12"
+                  key={index}
+                  data-aos="fade-up"
+                  data-aos-delay={index * 100}
+                >
                   <div className="nft_coll">
                     <div className="nft_wrap">
                       <Link to={`/item-details/${item.id}`}>
