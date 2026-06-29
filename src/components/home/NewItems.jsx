@@ -14,11 +14,11 @@ const NewItems = () => {
   const visibleItems =
     items.length >= 4
       ? [
-          items[startIndex],
-          items[(startIndex + 1) % items.length],
-          items[(startIndex + 2) % items.length],
-          items[(startIndex + 3) % items.length],
-        ]
+        items[startIndex],
+        items[(startIndex + 1) % items.length],
+        items[(startIndex + 2) % items.length],
+        items[(startIndex + 3) % items.length],
+      ]
       : [];
 
   const handleNext = () => {
@@ -66,17 +66,17 @@ const NewItems = () => {
   }, []);
 
   return (
-    <section id="section-items" className="no-bottom">
+    <section id="section-items" className="no-bottom" data-aos="fade-in">
       <div className="container">
 
-        <div className="row">
+        <div className="row" data-aos="fade-up">
           <div className="col-lg-12 text-center">
             <h2>New Items</h2>
             <div className="small-border bg-color-2"></div>
           </div>
         </div>
 
-        <div className="position-relative mt-4">
+        <div className="position-relative mt-4" data-aos="fade-up" data-aos-delay="150">
 
           {items.length > 4 && (
             <>
@@ -85,6 +85,7 @@ const NewItems = () => {
                 className="position-absolute start-0 top-50 translate-middle-y 
                            btn btn-light border rounded-circle shadow-sm"
                 style={{ width: "40px", height: "40px", zIndex: 10 }}
+                data-aos="zoom-in"
               >
                 <i className="fa fa-angle-left"></i>
               </button>
@@ -94,6 +95,8 @@ const NewItems = () => {
                 className="position-absolute end-0 top-50 translate-middle-y 
                            btn btn-light border rounded-circle shadow-sm"
                 style={{ width: "40px", height: "40px", zIndex: 10 }}
+                data-aos="zoom-in"
+                data-aos-delay="100"
               >
                 <i className="fa fa-angle-right"></i>
               </button>
@@ -105,7 +108,11 @@ const NewItems = () => {
             {/* SKELETONS */}
             {items.length === 0 &&
               new Array(4).fill(0).map((_, index) => (
-                <div className="col-lg-3 col-md-6 col-sm-6" key={index}>
+                <div className="col-lg-3 col-md-6 col-sm-6"
+                  key={index}
+                  data-aos="fade-up"
+                  data-aos-delay={index * 100}
+                >
                   <div className="nft__item">
 
                     <div className="author_list_pp">
@@ -133,10 +140,13 @@ const NewItems = () => {
                 </div>
               ))}
 
-            {/* REAL ITEMS */}
             {items.length > 0 &&
               visibleItems.map((item) => (
-                <div className="col-lg-3 col-md-6 col-sm-6" key={item.id}>
+                <div className="col-lg-3 col-md-6 col-sm-6"
+                  key={item.id}
+                  data-aos="fade-up"
+                >
+
                   <div className="nft__item">
 
                     <div className="author_list_pp">
