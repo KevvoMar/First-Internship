@@ -31,7 +31,7 @@ const Landing = () => {
                 interchangeable
               </p>
               <div className="spacer-10"></div>
-              <Link className="btn-main lead" to="/explore" data-aos="fade-up" data-aos-delay="300">
+              <Link to="/explore" className="btn-main lead" to="/explore" data-aos="fade-up" data-aos-delay="300">
                 Explore
               </Link>
               <div className="mb-sm-30"></div>
