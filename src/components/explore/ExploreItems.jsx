@@ -120,7 +120,7 @@ const ExploreItems = () => {
                 {loading ? (
                   <Skeleton width="100%" height="250px" borderRadius="10px" />
                 ) : (
-                  <Link to={`/item-details/${item.id}`}>
+                  <Link to={`/item-details/${item.nftId}`}>
                     <img
                       src={item.nftImage}
                       className="lazy nft__item_preview"
